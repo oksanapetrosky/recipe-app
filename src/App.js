@@ -26,7 +26,7 @@ function App() {
   
         try {
         const response = await fetch(
-        `https://api.edamam.com/api/recipes/v2?type=public&=${wordSubmit}&app_id=${MY_ID}&app_key=${MY_KEY}`
+            `https://api.edamam.com/api/recipes/v2?type=public&q=${wordSubmit}&app_id=${MY_ID}&app_key=${MY_KEY}`
         );
   
         const data = await response.json();
