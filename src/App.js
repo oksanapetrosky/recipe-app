@@ -7,8 +7,8 @@ const MAX_CACHED_RECIPES = 5;
 
 function App() {
   // STEP #1
-  const MY_ID = "eefe0044";
-  const MY_KEY = "ac27c5ebe2b4b127e657eeea428a1d5d	";
+  const MY_ID = "76403e27";
+  const MY_KEY = "b0683b3b146fe3cc06c396c737b5b85f";
 
   // STEP #3
   const [mySearch, setMySearch] = useState("");
@@ -24,9 +24,9 @@ function App() {
         return; 
       }
   
-      try {
+        try {
         const response = await fetch(
-          `https://api.edamam.com/api/recipes/v2?type=public&q=${wordSubmit}&app_id=${MY_ID}&app_key=${MY_KEY}`
+        `https://api.edamam.com/api/recipes/v2?type=public&=${wordSubmit}&app_id=${MY_ID}&app_key=${MY_KEY}`
         );
   
         const data = await response.json();
