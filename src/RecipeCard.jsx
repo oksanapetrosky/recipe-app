@@ -3,12 +3,10 @@ import React from 'react';
 const RecipeCard = ({ recipe }) => {
   if (!recipe || !recipe.image) {
     return <div>Recipe data not available</div>; // Handle the case where recipe data is missing
-}
+  }
 
   return (
-    <div 
-      className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-transform hover:scale-105"
-    >
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-transform hover:scale-105">
       <div className="relative">
         <img
           className="w-full h-48 object-cover object-center rounded-t-lg"
@@ -22,30 +20,29 @@ const RecipeCard = ({ recipe }) => {
         )}
       </div>
      
-        <div className="p-4">
-          <h1 className="text-2xl font-semibold text-gray-800 mb-2 capitalize">
-            {recipe.label}
-          </h1>
-          <div className="text-gray-600 mb-4">
-            <span className="block mb-1">
-              <b>Ingredients:</b>
+      <div className="p-4">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-2 capitalize">
+          {recipe.label}
+        </h1>
+        <div className="text-gray-600 mb-4">
+          <span className="block mb-1">
+            <b>Ingredients:</b>
+          </span>
+          {recipe.ingredients.map((ingredient, index) => (
+            <span key={index} className="block pl-4">
+              {ingredient}
             </span>
-            {recipe.ingredientLines.map((ingredient, index) => (
-              <span key={index} className="block pl-4">
-                {ingredient}
-              </span>
-            ))}
-          </div>
-          <a
-            href={"/"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-indigo-500 font-semibold hover:underline"
-          >
-            View Recipe
-          </a>
+          ))}
         </div>
-      
+        <a
+          href={"/"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-indigo-500 font-semibold hover:underline"
+        >
+          View Recipe
+        </a>
+      </div>
     </div>
   );
 };
