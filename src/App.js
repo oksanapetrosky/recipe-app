@@ -7,8 +7,8 @@ const MAX_CACHED_RECIPES = 5;
 
 function App() {
   // STEP #1
-  const MY_ID = "8ae71250";
-  const MY_KEY = "b5cb6b4b5ec9a536e71b7ffd2741ea7c";
+  const MY_ID = "eefe0044";
+  const MY_KEY = "ac27c5ebe2b4b127e657eeea428a1d5d	";
 
   // STEP #3
   const [mySearch, setMySearch] = useState("");
