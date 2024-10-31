@@ -1,20 +1,17 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import RecipeCard from './RecipeCard';
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 const MAX_CACHED_RECIPES = 5;
 
 function App() {
-  // STEP #1
-  const MY_ID = "76403e27";
-  const MY_KEY = "b0683b3b146fe3cc06c396c737b5b85f";
+  const MY_ID = "76403e27"; // Make sure to switch to environment variables for production
+  const MY_KEY = "b0683b3b146fe3cc06c396c737b5b85f"; // Same here
 
-  // STEP #3
   const [mySearch, setMySearch] = useState("");
   const [myRecipes, setMyRecipes] = useState([]);
   const [wordSubmit, setWordSubmit] = useState("shrimp");
-
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -24,7 +21,7 @@ function App() {
         return; 
       }
   
-         try {
+      try {
         const response = await fetch(
           `https://api.edamam.com/api/recipes/v2?type=public&q=${wordSubmit}&app_id=${MY_ID}&app_key=${MY_KEY}`
         );
@@ -39,14 +36,12 @@ function App() {
               ingredients: hit.recipe.ingredientLines
             }));
   
-            // I Limited cache size and clear cash from oldest request
             const allCachedRecipes = Object.keys(localStorage).filter(key => key.startsWith('recipes_'));
             if (allCachedRecipes.length >= MAX_CACHED_RECIPES) {
               const oldestKey = allCachedRecipes[0];
               localStorage.removeItem(oldestKey);
             }
   
-         
             try {
               localStorage.setItem(`recipes_${wordSubmit}`, JSON.stringify(simpleRecipes));
             } catch (error) {
@@ -80,7 +75,6 @@ function App() {
       }
     };
   
-   
     const timeoutId = setTimeout(() => {
       getRecipe();
     }, 1000); 
@@ -88,16 +82,14 @@ function App() {
     return () => clearTimeout(timeoutId); 
   }, [wordSubmit]);
 
-  // STEP #2
   const myRecipeSearch = (e) => {
     setMySearch(e.target.value);
   };
 
-  // #5
   const finalSearch = (e) => {
     e.preventDefault();
     setWordSubmit(mySearch);
-    setMySearch(''); // It Clears the input after submitting
+    setMySearch(''); // Clear the input after submitting
   };
 
   return (
@@ -111,7 +103,6 @@ function App() {
       </div>
 
       <div className="container mx-auto mt-8 p-4 sm:px-6 lg:px-8">
-        {/* #4 */}
         <form
           onSubmit={finalSearch}
           className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-md flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4"
@@ -137,7 +128,7 @@ function App() {
       <div className="container mx-auto mt-8 p-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {myRecipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe.recipe} />
+            <RecipeCard key={index} recipe={recipe} />
           ))}
         </div>
       </div>
@@ -146,3 +137,4 @@ function App() {
 }
 
 export default App;
+
